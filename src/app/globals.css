@@ -75,3 +75,21 @@
     
   }
 }
+
+.scrollbar-w-2 ::-webkit-scrollbar {
+  width: 0.25rem;
+  height: 0.25rem;
+}
+
+/* scrollbar-thumb-primary  scrolling-touch  */
+.scrollbar-track-primary-foreground ::-webkit-scrollbar-track {
+  background-color: var(--primary-foreground);
+}
+
+.scrollbar-thumb-primary ::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+}
+
+.scrollbar-thumb-rounded ::-webkit-scrollbar-thumb {
+  border-radius: 0.25rem;
+}

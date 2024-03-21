@@ -5,18 +5,11 @@ import { FC, useState } from "react";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { useToast } from "@/components/ui/use-toast";
+import MyToast from "@/lib/MyToast";
 
 const Page: FC = () => {
   const [isLoadingGoogle, setIsLoadingGoogle] = useState<boolean>(false);
   const [isLoadingGitHub, setIsLoadingGitHub] = useState<boolean>(false);
-  const { toast } = useToast();
-  function ToastDestructive() {
-    return toast({
-      variant: "destructive",
-      title: "Uh oh! Something went wrong.",
-      description: "There was a problem with your request.",
-    });
-  }
 
   async function loginWithGoogle() {
     setIsLoadingGoogle(true);
@@ -25,7 +18,11 @@ const Page: FC = () => {
       await signIn("google");
     } catch (error) {
       // display error message to user
-      ToastDestructive();
+      MyToast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+      });
     } finally {
       setIsLoadingGoogle(false);
     }
@@ -38,7 +35,11 @@ const Page: FC = () => {
       await signIn("github");
     } catch (error) {
       // display error message to user
-      ToastDestructive();
+      MyToast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+      });
     } finally {
       setIsLoadingGitHub(false);
     }

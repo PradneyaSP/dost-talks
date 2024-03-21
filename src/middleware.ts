@@ -32,7 +32,7 @@ export default withAuth(
       return NextResponse.redirect(new URL("/login", req.url));
 
     // Redirect users accessing the root ("/") to the dashboard if authenticated
-    if (pathname == "/" /*&& isAuth */)
+    if (pathname == "/")
       return NextResponse.redirect(new URL("/dashboard", req.url));
   },
   {

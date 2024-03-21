@@ -13,6 +13,7 @@ import Link from "next/link";
 import { fetchRedis } from "@/helper/redis";
 import { FC } from "react";
 import type { Session } from "next-auth";
+import IncomingRequests from "./IncomingRequests";
 
 interface Options {
   id: number;
@@ -59,18 +60,15 @@ const Overview: FC<OverviewProps> = async ({ session }) => {
                 <DropdownMenuItem className="flex justify-between items-center px-4">
                   <div>{option.name}</div>
                   <Icon className="h-4 w-4" />
-                  {option.name == "Incoming Requests" &&
-                    unseenFriendRequests > 0 && (
-                      <div className="w-5 h-5 rounded-full bg-primary text-primary-foreground flex justify-center items-center">
-                        {unseenFriendRequests}
-                      </div>
-                    )}
                 </DropdownMenuItem>
               </Link>
             );
           })}
-
-          <Link href="/dashboard/requests">
+          <IncomingRequests
+            sessionId={session.user.id}
+            unseenFriendRequests={unseenFriendRequests}
+          />
+          {/* <Link href="/dashboard/requests">
             <DropdownMenuItem className="flex justify-between items-center px-4">
               <div>Incoming Requests</div>
               {unseenFriendRequests > 0 ? (
@@ -81,7 +79,7 @@ const Overview: FC<OverviewProps> = async ({ session }) => {
                 <Users className="h-4 w-4" />
               )}
             </DropdownMenuItem>
-          </Link>
+          </Link> */}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>Log out</DropdownMenuItem>

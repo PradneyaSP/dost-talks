@@ -1,10 +1,9 @@
-import { Button } from "@/components/ui/button";
-import { db } from "@/lib/db";
+import SignOutButton from "@/components/SignOutButton";
 
 export default async function Home() {
   return (
     <main>
-      Hi There! <Button>Click Me!</Button>
+      Hi There! <SignOutButton className="h-full aspect-square" />
     </main>
   );
 }

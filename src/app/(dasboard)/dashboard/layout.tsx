@@ -7,6 +7,8 @@ import { Icons } from "@/components/Icons";
 import Overview from "@/components/Overview";
 import Image from "next/image";
 import SignOutButton from "@/components/SignOutButton";
+import getFriendsByUserId from "@/helper/get-friends-by-userid";
+import FriendsChatList from "@/components/FriendsChatList";
 
 export const metadata: Metadata = {
   title: "Dashboard | DostTalks",
@@ -20,24 +22,24 @@ export default async function DashboardLayout({ children }: LayoutProps) {
   const session = await getServerSession(authOptions);
   if (!session) notFound();
 
+  const friends = await getFriendsByUserId(session.user.id);
+  const parsedFriends = friends.map(friend => JSON.parse(friend));
+
   return (
     <div className="w-full h-screen flex">
       <div className="flex h-full w-full max-w-xs grow flex-col gap-y-5 overflow-y-auto border-r border-border bg-background px-6">
-        <Link
-          href="/dashboard"
-          className="flex h-16 shrink-0 items-center justify-between"
-        >
-          <Icons.Logo className="h-8 w-auto text-primary" />
+        <div className="flex items-center justify-between">
+          <Link href="/dashboard" className="flex h-16 shrink-0 items-center">
+            <Icons.Logo className="h-8 w-auto text-primary" />
+          </Link>
           <Overview session={session} />
-        </Link>
+        </div>
         <div className="text-xs text-secondary leading-6 font-semibold">
-          Your Chats
+          {parsedFriends.length >0 ? "Your Chats" : "Add Friends!"}
         </div>
 
         <nav className="flex flex-col flex-1">
-          <ul role="list" className="flex flex-1 flex-col gap-y-7">
-            <li>Chats that this user has</li>
-          </ul>
+          <FriendsChatList friends={parsedFriends} sessionId={session.user.id}/>
           <hr />
           <li className="-mx-6 mt-auto flex items-center">
             <div className="flex flex-1 items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-primary">
@@ -69,7 +71,7 @@ export default async function DashboardLayout({ children }: LayoutProps) {
           </li>
         </nav>
       </div>
-      {children}
+      <aside className="max-h-screen container py-8 w-full ">{children}</aside>
     </div>
   );
 }

@@ -1,6 +1,8 @@
 import { fetchRedis } from "@/helper/redis";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { pusherServer } from "@/lib/pusher";
+import { toPusherKey } from "@/lib/utils";
 import { friendEmailValidator } from "@/lib/validations/add-friend";
 import { getServerSession } from "next-auth";
 import { unstable_noStore as noStore } from "next/cache";
@@ -46,6 +48,12 @@ export async function POST(req: Request) {
       return new NextResponse("The User is your friend.", { status: 400 });
 
     // Valid user Id
+    pusherServer.trigger(
+      toPusherKey(`user:${idToAdd}:incoming_friend_requests`),
+      "incoming_friend_requests",
+      {friend: session.user }
+    );
+
     db.sadd(`user:${idToAdd}:incoming_friend_requests`, session.user.id);
     return new NextResponse("New friend request sent successfully", {
       status: 200,

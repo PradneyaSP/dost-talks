@@ -23,7 +23,7 @@ const page: FC = async ({}) => {
   
 
   return (
-    <main className="p-12">
+    <main>
       <h1 className="font-bold text-5xl mb-8">Friend Requests</h1>
       <FriendRequests incomingFriendRequests={requestsToDisplay} sessionId={session.user.id}/>
     </main>
