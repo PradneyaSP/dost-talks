@@ -14,35 +14,19 @@ import { fetchRedis } from "@/helper/redis";
 import { FC } from "react";
 import type { Session } from "next-auth";
 import IncomingRequests from "./IncomingRequests";
-
-interface Options {
-  id: number;
-  name: string;
-  href: string;
-  Icon: Icon;
-}
-
-const options: Options[] = [
-  {
-    id: 1,
-    name: "Add Friend",
-    href: "/dashboard/add",
-    Icon: "UserPlus",
-  },
-];
+import { SidebarOption } from "@/types/typings";
 
 interface OverviewProps {
   session: Session;
+  unseenFriendRequests: number;
+  options: SidebarOption[];
 }
 
-const Overview: FC<OverviewProps> = async ({ session }) => {
-  const unseenFriendRequests = (
-    (await fetchRedis(
-      "smembers",
-      `user:${session.user.id}:incoming_friend_requests`
-    )) as User[]
-  ).length;
-
+const Overview: FC<OverviewProps> = async ({
+  session,
+  unseenFriendRequests,
+  options,
+}) => {
   // console.log(unseenFriendRequests + `user:${session.user.id}:incoming_friend_requests`);
   return (
     <DropdownMenu>
@@ -57,9 +41,11 @@ const Overview: FC<OverviewProps> = async ({ session }) => {
             const Icon = Icons[option.Icon];
             return (
               <Link href={option.href} key={option.id}>
-                <DropdownMenuItem className="flex justify-between items-center px-4">
-                  <div>{option.name}</div>
-                  <Icon className="h-4 w-4" />
+                <DropdownMenuItem className="flex items-center px-2 space-x-4">
+                  <span className="text-gray-400 border-gray-200 group-hover:border-primary group-hover:text-primary flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white">
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  <div className="font-semibold">{option.name}</div>
                 </DropdownMenuItem>
               </Link>
             );

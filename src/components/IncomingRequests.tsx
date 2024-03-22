@@ -2,7 +2,6 @@
 
 import { pusherClient } from "@/lib/pusher";
 import { toPusherKey } from "@/lib/utils";
-import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
 import { Users } from "lucide-react";
 import { FC, useEffect, useState } from "react";
 import Link from "next/link";
@@ -39,16 +38,18 @@ const IncomingRequests: FC<IncomingRequestsProps> = ({
   }, [sessionId]);
   return (
     <Link href="/dashboard/requests">
-      <DropdownMenuItem className="relative cursor-default select-none rounded-sm py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 flex justify-between items-center px-4">
-        <div>Incoming Requests</div>
+      <div className="relative hover:text-primary hover:bg-slate-100 cursor-default select-none rounded-sm p-2 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 flex space-x-4 items-center">
         {unseenFriendRequestCount > 0 ? (
           <div className="w-5 h-5 rounded-full bg-primary text-primary-foreground flex justify-center items-center">
             {unseenFriendRequestCount}
           </div>
         ) : (
-          <Users className="h-4 w-4" />
+          <span className="text-gray-400 border-gray-200 group-hover:border-primary group-hover:text-primary flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white">
+            <Users className="h-4 w-4" />
+          </span>
         )}
-      </DropdownMenuItem>
+        <div className="font-semibold">Incoming Requests</div>
+      </div>
     </Link>
   );
 };
