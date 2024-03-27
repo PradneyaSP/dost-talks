@@ -1,36 +1,41 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Realtime Communication Messaging Application
 
-First, run the development server:
+## Overview
+DostTalks is a Realtime Communication Messaging Application designed to facilitate instant messaging between users in real-time. The website boosts an elegant responsive design with incredible UI/UX.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
+- **Real-time Messaging**: Users can send and receive messages instantly without any delay. This feature is achieved through web sockets.
+- **User Authentication**: Secure user authentication system to ensure data privacy and integrity. This feature is achieved through JWT and next-auth.
+- **Notifications**: Receive notifications for new messages, mentions, and other activities.
+- **Responsive Design**: User-friendly interface optimized for various devices and screen sizes.
+- **Scalable Website**: The website facilitates communication using Redis database, which is fast, secure and scalable.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technologies Used
+- **Frontend**: React.js, Next.js , Tailwind, Pusher.js
+- **Backend**: Node.js, Pusher.js , Redis
+- **Authentication**: JSON Web Tokens (JWT) , next-auth
+- **Database**: Upstash - Redis
+- **Deployment**: Vercel
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Installation
+1. Clone the repository: `git clone <repository-url>`
+2. Navigate to the project directory: `cd dost-talks`
+3. Install dependencies: `npm install`
+4. Start the development server: `npm start`
+5. Open your browser and visit `http://localhost:3000` to view the application.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Usage
+1. Sign up for a new account or log in with existing credentials.
+2. Add a new friend.
+3. Send messages and interact with other users in real-time.
 
-## Learn More
+## Contributing
+Contributions are welcome! Feel free to fork the repository and submit pull requests for any improvements, bug fixes, or new features.
 
-To learn more about Next.js, take a look at the following resources:
+## Acknowledgements
+- Special thanks to [Josh tried coding].
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contact
+For any inquiries or feedback, please contact [Pradneya Prabhudesai] at [pradneya.prog@gmail.com].
