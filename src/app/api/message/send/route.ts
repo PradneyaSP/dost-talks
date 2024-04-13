@@ -45,10 +45,10 @@ export async function POST(req: NextRequest) {
 
     const message = messageSchema.parse(messageData) as Message;
     //Realtime message wala part
-    pusherServer.trigger(toPusherKey(`chat:${chatId}`), "incoming_messages", {
+    await pusherServer.trigger(toPusherKey(`chat:${chatId}`), "incoming_messages", {
       message,
     });
-    pusherServer.trigger(toPusherKey(`user:${friendId}:chats`), "new_message", {
+    await pusherServer.trigger(toPusherKey(`user:${friendId}:chats`), "new_message", {
       ...message,
       senderImg: sender.image,
       senderName: sender.name, 

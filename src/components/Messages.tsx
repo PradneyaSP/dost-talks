@@ -34,6 +34,7 @@ const Messages: FC<MessagesProps> = ({
 
     const messageHandler = ({message}: {message:Message}) => {
       setMessages(prev => [message , ...prev])
+      console.log(messages)
     };
 
     pusherClient.bind(`incoming_messages`, messageHandler);

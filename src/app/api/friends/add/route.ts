@@ -48,7 +48,7 @@ export async function POST(req: Request) {
       return new NextResponse("The User is your friend.", { status: 400 });
 
     // Valid user Id
-    pusherServer.trigger(
+    await pusherServer.trigger(
       toPusherKey(`user:${idToAdd}:incoming_friend_requests`),
       "incoming_friend_requests",
       {friend: session.user }
